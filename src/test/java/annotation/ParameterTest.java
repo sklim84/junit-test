@@ -1,12 +1,10 @@
 package annotation;
 
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -65,5 +63,25 @@ public class ParameterTest {
         assertTrue(input > 0);
     }
 
+    static Stream<Arguments> fruitPrices() {
+        return Stream.of(
+                Arguments.of("apple", 1, LocalDate.of(2022, 7, 1)),
+                Arguments.of("banana", 2, LocalDate.of(2022, 7, 2)),
+                Arguments.of("orange", 3, LocalDate.of(2022, 7, 3))
+        );
+    }
 
+    @ParameterizedTest
+    @MethodSource("fruitPrices")
+    void testFruitPrices(String fruit, int price, LocalDate date) {
+        assertTrue(price > 0);
+    }
+
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/fruit_prices.csv", numLinesToSkip = 1)
+    void testFruitPrices(String fruit, int price) {
+        // numLinesToSkip = 1 : 타이틀 스킵
+        assertTrue(price > 0);
+    }
 }
