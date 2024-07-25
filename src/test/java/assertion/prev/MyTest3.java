@@ -1,9 +1,9 @@
-package assertion;
+package assertion.prev;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+public class MyTest3 {
 
-class MyTest {
     @Test
     void myTestMethod() {
         String expected = "Hello, World!";
@@ -11,4 +11,3 @@ class MyTest {
         assertEquals(expected, actual);
     }
 }
-

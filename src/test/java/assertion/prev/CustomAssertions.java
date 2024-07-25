@@ -1,4 +1,4 @@
-package assertion;
+package assertion.prev;
 
 import org.junit.jupiter.api.Assertions;
 

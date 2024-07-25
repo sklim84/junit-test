@@ -1,4 +1,4 @@
-package assertion;
+package assertion.prev;
 
 public class Employee {
     private int num;

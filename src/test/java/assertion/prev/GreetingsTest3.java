@@ -1,28 +1,27 @@
-package assertion;
+package assertion.prev;
 
-import org.junit.Assume;
 import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
-import org.example.Greetings;
+import org.example3.Greetings3;
 
-import java.beans.IntrospectionException;
-import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.*;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@DisplayName("Greetings Test")
-public class GreetingsTest {
+@DisplayName("Greetings3 Test")
+public class GreetingsTest3 {
     @Test
     @DisplayName("Testing Greet method")
     void testGreet() {
-        // create an instance of the class you want to test
-        Greetings greetings = new Greetings();
+        Greetings3 greetings = new Greetings3();
+
         String name = "Jenny";
         String result = greetings.greet(name);
-        // check the output with expected result
         assertEquals("Hello, Jenny", result);
+
     }
 
     @Test
@@ -37,7 +36,7 @@ public class GreetingsTest {
         assertEquals(value1, value2);
         assertNotEquals(value1, value2 + 1);
         assertEquals(string1, string2);
-        assertNotEquals(string1, "world");
+        assertNotEquals(value1, "world");
         assertSame(obj1, obj1);
         assertNotSame(obj1, obj2);
     }
@@ -46,19 +45,19 @@ public class GreetingsTest {
     void testBoolean() {
         boolean condition1 = true;
         boolean condition2 = false;
-
         assertTrue(condition1);
         assertFalse(condition2);
     }
 
     @Test
     void testExceptions() {
-        // divide 0
         assertThrows(ArithmeticException.class,
-                () -> { int value = 1 / 0; });
-        // divide 1
-        assertDoesNotThrow(
-                () -> { int value = 1 / 1; });
+                () -> {
+                    int value = 1 / 0;
+                });
+        assertDoesNotThrow(() -> {
+            int value = 1 / 1;
+        });
     }
 
     @Test
@@ -80,13 +79,13 @@ public class GreetingsTest {
     @Test
     void testAssertLinesMatchRegExp() {
         List<String> expectedList = List.of("luv", "[2-7]+", "code");
-        List<String> actualist = List.of("luv", "5", "code");
-        assertLinesMatch(expectedList, actualist, "Expected lines should match actual lines");
+        List<String> actualList = List.of("luv", "8", "code");
+        assertLinesMatch(expectedList, actualList, "Expected lines should match actual lines");
     }
 
     @Test
     void testAssertLinesMatchFF() {
-        List<String> expectedList = List.of("luv", "my", ">> 4 >>", "code");
+        List<String> expectedList = List.of("luv", "my", ">>4>>", "code");
         List<String> actualList = List.of("luv", "my", "one", "two", "three", "four", "code");
         assertLinesMatch(expectedList, actualList, "Expected lines should match actual lines");
     }
@@ -107,23 +106,20 @@ public class GreetingsTest {
     @Test
     void testAssertThrows() {
         String str = null;
-        assertThrows(NullPointerException.class, () -> str.length());
+        assertThrows(NullPointerException.class, ()->str.length());
     }
 
     @Test
     void testAssertTimeout() {
-        assertTimeout(Duration.ofSeconds(1), () -> {
-            // Code that should not take more than 1 second to run
+        assertTimeout(Duration.ofSeconds(1), ()-> {
             Thread.sleep(10);
         });
     }
 
-
     @Test
     void testOnlyRunsOnLinux() {
-        Assume.assumeTrue(System.getProperty("os.name").toLowerCase().contains("windows"));
+        assumeTrue(System.getProperty("os.name").toLowerCase().contains("windows"));
 
-        // Test code that only runs on Windows
         String string1 = "hello";
         String string2 = "hello";
         assertEquals(string1, string2);
@@ -136,6 +132,4 @@ public class GreetingsTest {
         double delta = 0.01;
         assertEquals(expected, actual, delta);
     }
-
 }
-
