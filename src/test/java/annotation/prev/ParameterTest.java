@@ -1,4 +1,4 @@
-package annotation;
+package annotation.prev;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
@@ -15,7 +15,7 @@ public class ParameterTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"racecar", "radar", "level"})
+    @ValueSource(strings = {"racecar1", "radar", "level"})
     void testIsPalindrome(String input) {
         assertTrue(isPalindrome(input));
     }

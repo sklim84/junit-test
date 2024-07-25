@@ -1,4 +1,4 @@
-package annotation;
+package annotation.prev;
 
 import org.junit.jupiter.api.Test;
 
